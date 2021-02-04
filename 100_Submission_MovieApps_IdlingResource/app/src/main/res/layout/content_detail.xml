@@ -1,0 +1,100 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <ImageView
+            android:id="@+id/img_coverDetail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:foreground="@drawable/bg_overlay"
+            android:contentDescription="@string/content_description"/>
+
+        <RelativeLayout
+            android:id="@+id/posterView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-80dp"
+            android:layout_below="@+id/img_coverDetail"
+            android:paddingHorizontal="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:padding="10dp"
+                app:cardBackgroundColor="@color/darkBlue"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp">
+
+                <ImageView
+                    android:id="@+id/img_posterDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    android:contentDescription="@string/content_description" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_yearsRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="90dp"
+                android:layout_toEndOf="@+id/cardView"
+                android:textColor="@color/textDesc"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTitleFilms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_yearsRelease"
+                android:layout_marginStart="30dp"
+                android:layout_toEndOf="@+id/cardView"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btnImg_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="43dp"
+                android:layout_toEndOf="@+id/tv_yearsRelease"
+                android:backgroundTint="@color/background"
+                android:contentDescription="@string/content_description"
+                android:src="@drawable/ic_baseline_share_24" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/posterView"
+            android:layout_alignParentBottom="true"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabsDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabTextColor="@android:color/white"/>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPaggerDetail"
+                android:layout_width="match_parent"
+                android:layout_height="650dp"/>
+        </LinearLayout>
+    </RelativeLayout>

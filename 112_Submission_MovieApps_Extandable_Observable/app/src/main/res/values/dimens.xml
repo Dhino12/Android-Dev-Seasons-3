@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="parallax_image_height">250dp</dimen>
+    <dimen name="flexible_space_image_height">250dp</dimen>
+    <dimen name="margin_standard">16dp</dimen>
+</resources>

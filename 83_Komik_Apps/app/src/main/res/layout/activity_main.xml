@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <xyz.sahildave.arclayout.ArcLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:arc_cropCurve="cropConvex"
+        app:arc_height="48dp"
+        app:arc_position="bottom">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#269AFF"
+            android:orientation="vertical"
+            android:scaleType="fitXY"/>
+    </xyz.sahildave.arclayout.ArcLayout>
+
+    <include layout="@layout/main_toolbar"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/toolbar">
+        <FrameLayout
+            android:id="@+id/frameContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.akshay.library.CurveBottomBar
+            android:id="@+id/curveBottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="bottom"
+            app:bottomBarColor="#269AFF"
+            app:curveRadius="30dp"
+            app:itemIconTint="#FFFFFF"
+            app:itemTextColor="#FFFFFF"
+            app:menu="@menu/menu_navigation"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="35dp"
+            android:backgroundTint="#FF44D7"
+            android:src="@drawable/ic_baseline_menu_book_24"
+            app:elevation="4dp"
+            app:fabSize="normal"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">MovieCatalog</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="watchNow">Sudah Rilis</string>
+    <string name="content_description">ContentDescription</string>
+    <string name="description">Description</string>
+    <string name="date_release">Date Release / Broadcast Date</string>
+    <string name="title">Title</string>
+    <string name="title_duration">Duration</string>
+    <string name="title_director">Director</string>
+    <string name="Title">Naruto Shippuden</string>
+    <string name="status">Status :</string>
+    <string name="synopsis">Synopsis :</string>
+    <string name="trailer">Trailer :</string>
+    <string name="shareText">Bagikan_Film : %s</string>
+    <string name="years_publish">Tahun Terbit</string>
+    <string name="duration">1h 34m</string>
+    <string name="director">Hajime Kamegaki</string>
+    <string name="text_writer">Writer</string>
+    <string name="writer">Masashi Kishimoto</string>
+    <string name="text_date">10 Januari 2020</string>
+    <string name="title_rilis">Rilis</string>
+
+</resources>

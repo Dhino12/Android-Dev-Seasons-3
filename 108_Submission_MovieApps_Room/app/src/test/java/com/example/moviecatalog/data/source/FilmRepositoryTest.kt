@@ -1,0 +1,126 @@
+package com.example.moviecatalog.data.source
+
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import com.example.moviecatalog.data.source.local.LocalDataSource
+import com.example.moviecatalog.data.source.local.entity.combined_entity.MovieWithDetail
+import com.example.moviecatalog.data.source.local.entity.combined_entity.TvWithDetail
+import com.example.moviecatalog.data.source.local.entity.movie_entity.MovieEntitys
+import com.example.moviecatalog.data.source.local.entity.movie_entity.UpcomingMovieEntity
+import com.example.moviecatalog.data.source.local.entity.tv_entity.TvEntitys
+import com.example.moviecatalog.data.source.local.entity.tv_entity.UpcomingTvEntity
+import com.example.moviecatalog.data.source.remote.RemoteDataSource
+import com.example.moviecatalog.utils.AppExecutors
+import com.example.moviecatalog.utils.DataDummy
+import com.example.moviecatalog.utils.LiveDataTestUtil
+
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Rule
+import org.junit.Test
+import org.mockito.Mockito.mock
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.eq
+import com.nhaarman.mockitokotlin2.doAnswer
+import org.mockito.Mockito.`when`
+
+class FilmRepositoryTest {
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
+
+    private val remote = mock(RemoteDataSource::class.java)
+    private val local = mock(LocalDataSource::class.java)
+    private val appExecutor = mock(AppExecutors::class.java)
+    private val filmRepository = FakeFilmRepository(remote,local,appExecutor)
+
+    private val movieResponse = DataDummy.generateDummyRemoteMovie()
+
+    private val tvResponse = DataDummy.generateRemoteDummyTV()
+
+    private val upMovieResponse = DataDummy.generateRemoteUpcominglDummyMovie()
+
+    private val upTvResponse = DataDummy.generateRemoteUpcominglDummyTv()
+
+    private val movieDetailResponse = DataDummy.generateRemoteDetailMovie()[0]
+    private val movieDetailID = movieDetailResponse.id
+
+    private val tvDetailResponse = DataDummy.generateRemoteDetailDummyTV()
+    private val tvDetailID = tvDetailResponse.id
+
+    @Test
+    fun getAllMovies() {
+        val dummyMovie = MutableLiveData<List<MovieEntitys>>()
+        dummyMovie.value = DataDummy.generateDummyMovie()
+        `when`(local.getAllMovie()).thenReturn(dummyMovie)
+
+        val movieEntity = LiveDataTestUtil.getValue(filmRepository.getAllMovies())
+        verify(local).getAllMovie()
+        assertNotNull(movieEntity.data)
+        assertEquals(movieResponse.size.toLong(), movieEntity.data?.size?.toLong())
+    }
+
+    @Test
+    fun getAllTv() {
+        val dummyTv = MutableLiveData<List<TvEntitys>>()
+        dummyTv.value  = DataDummy.generateDummyTV()
+        `when`(local.getAllTv()).thenReturn(dummyTv)
+
+        val tvEntity = LiveDataTestUtil.getValue(filmRepository.getAllTv())
+        verify(local).getAllTv()
+        assertNotNull(tvEntity)
+        assertEquals(tvResponse.size.toLong(), tvEntity.data?.size?.toLong())
+    }
+
+    @Test
+    fun getMovieDetail() {
+        val dummyEntity = MutableLiveData<MovieWithDetail>()
+        dummyEntity.value = DataDummy.generateDummyMovieWithDetail(DataDummy.generateDetailMovie()[0])
+        `when`(local.getDetailMovieWithID(movieDetailID)).thenReturn(dummyEntity)
+
+        val movieDetailEntity = LiveDataTestUtil.getValue(filmRepository.getMovieDetail(movieDetailID))
+        verify(local).getDetailMovieWithID(movieDetailID)
+        assertNotNull(movieDetailEntity)
+        assertNotNull(movieDetailEntity.data?.mMovieDetail?.title)
+        assertEquals(movieDetailResponse.title, movieDetailEntity.data?.mMovieDetail?.title)
+    }
+
+    @Test
+    fun getTvDetail(){
+        val dummyEntity = MutableLiveData<TvWithDetail>()
+        dummyEntity.value = DataDummy.generateDummyTvWithDetail(DataDummy.generateDetailDummyTV())
+        `when`(local.getDetailTvWithID(tvDetailID!!)).thenReturn(dummyEntity)
+
+        val tvDetailEntity = LiveDataTestUtil.getValue(filmRepository.getTvDetail(tvDetailID))
+        verify(local).getDetailTvWithID(tvDetailID)
+
+        assertNotNull(tvDetailEntity.data)
+        assertNotNull(tvDetailEntity.data?.mTvDetail?.overview)
+        assertEquals(tvDetailResponse.originalName, tvDetailEntity.data?.mTvDetail?.originalName)
+    }
+
+    @Test
+    fun getUpcomingMovie(){
+        val dummyUpMovie = MutableLiveData<List<UpcomingMovieEntity>>()
+        dummyUpMovie.value = DataDummy.generateUpcominglDummyMovie()
+        `when`(local.getUpcomingMovie()).thenReturn(dummyUpMovie)
+
+        val upMovieEntity = LiveDataTestUtil.getValue(filmRepository.getUpcomingMovie())
+        verify(local).getUpcomingMovie()
+
+        assertEquals(upMovieResponse.size.toLong(), upMovieEntity.data?.size?.toLong())
+    }
+
+    @Test
+    fun getUpcomingTv(){
+        val dummyUpTv = MutableLiveData<List<UpcomingTvEntity>>()
+        dummyUpTv.value = DataDummy.generateUpcominglDummyTv()
+        `when`(local.getUpComingTv()).thenReturn(dummyUpTv)
+
+        val upTvEntity = LiveDataTestUtil.getValue(filmRepository.getUpcomingTv())
+        verify(local).getUpComingTv()
+
+        assertEquals(upTvEntity.data?.size?.toLong(), upTvResponse.size.toLong())
+    }
+}

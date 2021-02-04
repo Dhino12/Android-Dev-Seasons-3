@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#898989</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="darkBlue">#27193E</color>
+    <color name="textActive">#fff</color>
+    <color name="colorTextTertiary">#EFEFEF</color>
+    <color name="textDesc">#685098</color>
+    <color name="textNotActive">#495157</color>
+    <color name="background">#201632</color>
+    <color name="bgNavBTM">#3F2C62</color>
+    <color name="colorDarkPurple">#201632</color>
+    <color name="colorForeground">#923D3746</color>
+</resources>
